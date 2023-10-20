@@ -3,12 +3,13 @@ const path = require('path');
 const app = express();
 const PORT = 3000; // You can change this port to any available port you want
 
-// Set the directory for static files
-app.use(express.static(path.join(__dirname, 'public')));
+// Set the absolute path for the public directory
+const publicPath = path.join(__dirname, 'public');
+app.use(express.static(publicPath));
 
 // Set up a route to serve your single-page site
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(publicPath, 'index.html'));
 });
 
 // Start the server
