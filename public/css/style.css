@@ -2,8 +2,7 @@ body {
   font-weight: 200;
   overflow-x: hidden;
   letter-spacing: -.02rem;
-  color: #05112b;
-  background-color: #fff; }
+  color: #05112b; }
 
 blockquote, body, dd, dl, figcaption, figure, h1, h2, h3, h4, li, ol, p, ul {
   margin: 0; }
@@ -12,34 +11,59 @@ blockquote, body, dd, dl, figcaption, figure, h1, h2, h3, h4, li, ol, p, ul {
   display: none; }
 
 .mfp-content {
-  background-color: white; }
+  background-color: white;
+  max-width: 700px;
+  padding: 20px;
+  border-radius: 5px;
+  box-sizing: border-box; }
+
+.btn {
+  border: 0;
+  padding: 10px 20px;
+  color: white;
+  margin: 0 5px 0 0;
+  background-color: #9b9b9b; }
+  .btn.btn-secondary {
+    background: #4CAF50; }
+  .btn.btn-danger {
+    background-color: red; }
+
+.dataTables_wrapper {
+  padding: 20px 0; }
 
 .crudAllUsersWrap {
   max-width: 900px;
-  margin: 0 auto; }
-
-.crudAllUsersAdd {
-  padding: 20px 0; }
+  margin: 0 auto;
+  padding-top: 20px; }
 
 .crudAllUsersAddLink {
   text-decoration: none;
   color: #000;
   font-weight: bold; }
+  .crudAllUsersAddLink:hover {
+    text-decoration: underline; }
 
 .pageHeader {
   width: 100%;
-  position: relative; }
+  position: relative;
+  background-color: #9e9e9e45; }
   .pageHeaderMsg {
     font-weight: bold; }
+  .pageHeaderSecond {
+    display: flex;
+    flex-direction: row;
+    gap: 20px; }
   .pageHeaderWrap {
     max-width: 900px;
     margin: 0 auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: 1px solid;
     padding: 20px 0; }
   .pageHeaderLogout {
     text-decoration: none;
     color: #000;
-    font-weight: bold; }
+    font-weight: bold;
+    text-transform: uppercase; }
+    .pageHeaderLogout:hover {
+      text-decoration: underline; }
