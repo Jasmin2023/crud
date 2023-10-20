@@ -1,0 +1,53 @@
+
+body {
+    font-weight: 200;
+    overflow-x: hidden;
+    letter-spacing: -.02rem;
+    color: #05112b;
+    background-color: #fff;
+}
+blockquote, body, dd, dl, figcaption, figure, h1, h2, h3, h4, li, ol, p, ul {
+    margin: 0;
+}
+.add-container {
+    display: none;
+}
+.mfp-content {
+    background-color: white;
+}
+.crudAllUsers {
+    &Wrap {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    &Add {
+        padding: 20px 0;
+    }
+    &AddLink {
+        text-decoration: none;
+        color: #000;
+        font-weight: bold;
+    }
+}
+.pageHeader {
+    width: 100%;
+    position: relative;
+    &Msg {
+        font-weight: bold;
+    }
+     
+    &Wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        border-bottom: 1px solid;
+        padding: 20px 0;
+    }
+    &Logout {
+        text-decoration: none;
+        color: #000;
+        font-weight: bold;
+    }
+}
