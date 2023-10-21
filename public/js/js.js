@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const storedEmail = localStorage.getItem("email");
     const crudAllUsers = document.querySelector(".crudAllUsers");
     const pageHeader = document.querySelector(".pageHeader");
+    const profileTable = document.getElementById("profileTable");
     
     if (token) {
       // If a token exists, show the logout link and hide the login form
@@ -86,16 +87,76 @@ document.addEventListener("DOMContentLoaded", function() {
   const baseurl = 'https://reqres.in/api/';
   var userList = [];
   let totalNumberOfPages = 0;
+  function deleteUser() {
+    console.log("color")
+  }
+  function updateProfile(userId) {
+    console.log("updating changes");
+    const para = 'users/';
+    const url = baseurl + para + userId;
+    fetch(url, {
+      method: "PATCH",
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({
+        first_name: document.getElementById('updated-fname').value,
+        job: document.getElementById('updated-Job').value
+    })
+    }).then(response => response.json())
+      .then(data => {
+         
+        document.getElementById('updated-at').innerHTML = data.updatedAt;
+        document.getElementById('updated-fname').value = data.first_name;
+        document.getElementById('updated-Job').value = data.job;
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+  function userProfile(userId) {
+    console.log("Profile of user with ID:", userId);
+    const para = 'users/';
+    const url = baseurl + para + userId;
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        const profile = data.data;
+        profileTable.innerHTML = `
+        <table class="table" width="100%">
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Avatar</th>
+                        <th>Last Updated</th>
+                        <th>Job</th>
+                    </tr>
+                    <tr>
+                        <td>${profile.id}</td>
+                        <td><input class="form-control" type="text" id="updated-fname" value="${profile.first_name}"> </td>
+                        <td>${profile.last_name}</td>
+                        <td>${profile.email}</td>
+                        <td><img width="40" src="${profile.avatar}"></td>
+                        <td id="updated-at">${profile.updatedAt}</td>
+                        <td><input class="form-control" type="text" id="updated-Job" value="${profile.job}"></td>
+                    </tr>
+                </table>
+                <div class="back-btn-container col-xs-12 text-center">
+                    <button class="btn btn-secondary" onclick="updateProfile(${profile.id})">UPDATE</button>
+                   
+                </div>
+        `
+      })
+  }
   function loadData() {
       const para = 'users?page=';
       const url = baseurl + para;
       fetch(url + 1).then(res => res.json()).then(res => {
         totalNumberOfPages = res.total_pages;
-
         for(let id = 1; id <= totalNumberOfPages; id++){
-          
           fetch(url + id).then(response => response.json()).then(response => {
-            console.log(response.data)
             response.data.forEach(element => {
               userList.push(element);
             });
@@ -111,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     {
                         data: "id",
                         render: function(data){
-                            return " <button class='btn btn-secondary' data-id="+ data +" onclick='userColor("+ data +");userProfile("+ data +");'>Update</button><button class='btn btn-danger' data-id=" + data + " onclick='deleteUser("+ data +")'>Delete</button>";
+                            return " <button class='btn btn-secondary' data-id="+ data +" onclick='userProfile("+ data +");'>Update</button><button class='btn btn-danger' data-id=" + data + " onclick='deleteUser("+ data +")'>Delete</button>";
                         }
                     },   
                ]
@@ -122,6 +183,11 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   
   loadData();
-  function addNewUser() {
+  function addNewUser(first, last) {
+    const url = 'https://reqres.in/api/users';
+    const data = {
+      first_name: firstName,
+      last_name: lastName,
+    };
 
   }
