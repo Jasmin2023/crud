@@ -79,7 +79,6 @@ document.addEventListener("DOMContentLoaded", function() {
       loginForm.style.display = "block";
       crudAllUsers.style.display = "none";
       pageHeader.style.display = "none";
-
     });
      // login form end
      
@@ -90,8 +89,59 @@ document.addEventListener("DOMContentLoaded", function() {
   function deleteUser() {
     console.log("color")
   }
+  function profileColor(userId) {
+    const para = 'unknown/';
+    const url = baseurl + para + userId;
+    fetch(url, {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        const profileTheme = data.data;
+        createColor(profileTheme)
+
+      });
+  }
+  function changeColorFunction() {
+    const colorValue = document.getElementById('colorValue').value;
+    document.getElementById('colorTitle').style.color =  colorValue;
+  }
+  function back() {
+    //const crudAllUsers = document.querySelector(".crudAllUsers");
+    //const profileTableContainer = document.querySelector(".profileTableContainer");
+    //const profileTheme = document.querySelector(".profileTheme");
+
+    //crudAllUsers.style.display = "block";
+    //profileTableContainer.style.display = "none";
+    //profileTheme.style.display = "none";
+
+  } 
+  function createColor(data) {
+    const profileTheme = document.querySelector(".profileTheme");
+    profileTheme.innerHTML = `
+      <h3 class="title" id="colorTitle" style="color:${data.color}">My Color</h3>
+      <table class="table" width="100%">
+          <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Year</th>
+              <th>Color</th>
+              <th>Pantone value</th>
+          </tr>
+          <tr>
+              <td>${data.id}</td>
+              <td>${data.name}</td>
+              <td>${data.year}</td>
+              <td><input class="form-control" type="text" id="colorValue" oninput="changeColorFunction()" value="${data.color}"> </td>
+              <td>${data.pantone_value}</td>
+          </tr>
+      </table>
+    `
+  }
   function updateProfile(userId) {
-    console.log("updating changes");
     const para = 'users/';
     const url = baseurl + para + userId;
     fetch(url, {
@@ -115,7 +165,17 @@ document.addEventListener("DOMContentLoaded", function() {
       });
   }
   function userProfile(userId) {
-    console.log("Profile of user with ID:", userId);
+    //profileTableContainer, .profileTheme
+    const profileTableContainer = document.querySelector(".profileTableContainer");
+    const profileTheme = document.querySelector(".profileTheme");
+    const add_user = document.getElementById("add_user");
+    //const table_id = document.getElementById("table_id_wrapper");
+    //table_id.style.display = "none";
+    const crudAllUsers = document.querySelector(".crudAllUsers");
+    //crudAllUsers.style.display = "none";
+    //add_user.style.display = "none";
+    profileTableContainer.classList.add("active");
+    profileTheme.classList.add("active");
     const para = 'users/';
     const url = baseurl + para + userId;
     fetch(url)
@@ -172,7 +232,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     {
                         data: "id",
                         render: function(data){
-                            return " <button class='btn btn-secondary' data-id="+ data +" onclick='userProfile("+ data +");'>Update</button><button class='btn btn-danger' data-id=" + data + " onclick='deleteUser("+ data +")'>Delete</button>";
+                            return " <button class='btn btn-secondary' data-id="+ data +" onclick='profileColor("+ data +");userProfile("+ data +");'>Update</button><button class='btn btn-danger' data-id=" + data + " onclick='deleteUser("+ data +")'>Delete</button>";
                         }
                     },   
                ]
@@ -183,11 +243,11 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   
   loadData();
-  function addNewUser(first, last) {
-    const url = 'https://reqres.in/api/users';
-    const data = {
-      first_name: firstName,
-      last_name: lastName,
-    };
+  //function addNewUser(first, last) {
+  //  const url = 'https://reqres.in/api/users';
+  //  const data = {
+  //    first_name: firstName,
+  //    last_name: lastName,
+  //  };
 
-  }
+  //}
