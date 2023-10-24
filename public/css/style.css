@@ -39,6 +39,21 @@ blockquote, body, dd, dl, figcaption, figure, h1, h2, h3, h4, li, ol, p, ul {
 .dataTables_wrapper {
   padding: 20px 0; }
 
+.loginFormSection {
+  border: 1px solid #9b9b9b;
+  padding: 30px 20px;
+  max-width: 500px;
+  margin: 0 auto; }
+  .loginFormSection form .btn {
+    margin-top: 10px; }
+  .loginFormSection form label {
+    line-height: 30px; }
+  .loginFormSection form input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 20px;
+    padding: 20px 10px; }
+
 .profileTableContainer, .profileTheme {
   max-width: 900px;
   margin: 0 auto; }

@@ -33,19 +33,24 @@
         <a href="#" id="logoutLink" class="pageHeaderLogout">Logout</a> 
       </div>
     </header>
-     
-    <form id="loginForm">
-      <div>
-        <label for="email">email: eve.holt@reqres.in</label>
-        <input type="text" id="email" name="email" required>
-      </div>
-      <div>
-        <label for="password">Password: cityslicka</label>
-        <input type="password" id="password" name="password" required>
-      </div>
-      <button type="submit">Login</button>
-    </form>
+    <section class="loginFormSection">
+      <form id="loginForm">
+        <div>
+          <label for="email">Email: eve.holt@reqres.in</label>
+          <br>
+          <input type="text" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="password">Password: cityslicka</label>
+          <br>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn">Login</button>
+      </form>
+    </section>
+    
     <!-- section 1 -->
+    <section class="loggedIn">
     <div class="profileTableContainer" id="profileTable"></div>
     <div class="profileTheme"></div>
     <div class="crudAllUsers">
@@ -84,11 +89,9 @@
         </table>
       </div>
     </div>
-
-    <script>
-       
-    </script>
-     <!-- Include Magnific Popup JS -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    </section>
+     
+    <!-- Include Magnific Popup JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
   </body>
 </html>
