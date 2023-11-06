@@ -15,9 +15,27 @@ export async function getUserList() {
         const result = await response.json();
         result.data.forEach((element) => {
           userList.push(element);
+           
         });
     }
-    return userList;
+    const result = $('#table_id').DataTable({
+        paging: true,
+        searching: true,
+        data: userList,
+        "bDestroy": true,
+        "columns":[  
+            {data: "id"},  
+            {data: "first_name"},  
+            {data: "last_name"}, 
+            {
+                data: "id",
+                render: function(data){
+                    return " <button class='profileButton btn btn-secondary' data-id="+ data +">View Profile</button>";
+                }
+            },   
+        ]
+      }); 
+    return result;
 }
 ///////////////////////////////////////////////////////
 //new

@@ -16,6 +16,34 @@ document.addEventListener("DOMContentLoaded", async function() {
   const loggedIn = document.querySelector(".loggedIn");
   const token = auth.checkToken();
   const users = await api.getUserList();
+    
+  //$('#table_id').DataTable({
+  //  paging: true,
+  //  searching: true,
+  //  data: users,
+  //  "bDestroy": true,
+  //  "columns":[  
+  //      {data: "id"},  
+  //      {data: "first_name"},  
+  //      {data: "last_name"}, 
+  //      {
+  //          data: "id",
+  //          render: function(data){
+  //              return " <button class='profileButton btn btn-secondary' data-id="+ data +">View Profile</button>";
+  //          }
+  //      },   
+  //  ]
+  //}); 
+  
+  ///////////////////////////////////////////////////////
+  //new
+  document.getElementById('table_id').addEventListener('click', async function(event) {
+      if(event.target && event.target.classList.contains('profileButton')) {
+          const userId = event.target.getAttribute('data-id');
+          await userProfile(userId);
+      }
+  });
+
   ///////////////////////////////////////////////////////
   //new   
   if (token) {
@@ -34,37 +62,11 @@ document.addEventListener("DOMContentLoaded", async function() {
 
   if (storedEmail) {
     emailInput.value = storedEmail;
-  }  
-  $('#table_id').DataTable({
-    paging: true,
-    searching: true,
-    data: users,
-    "bDestroy": true,
-    "columns":[  
-        {data: "id"},  
-        {data: "first_name"},  
-        {data: "last_name"}, 
-        {
-            data: "id",
-            render: function(data){
-                return " <button class='profileButton btn btn-secondary' data-id="+ data +">View Profile</button>";
-            }
-        },   
-    ]
-  }); 
-  
+  }
   ///////////////////////////////////////////////////////
-  //new
-  document.getElementById('table_id').addEventListener('click', async function(event) {
-      if(event.target && event.target.classList.contains('profileButton')) {
-          const userId = event.target.getAttribute('data-id');
-          await userProfile(userId);
-      }
-  });
-
-  ///////////////////////////////////////////////////////
+  //new  
   auth.handleLoginForm(loginForm, messageDiv, loginFormSection, loggedIn, pageHeader, logoutLink, emailInput, passwordInput);
-  ///////////////////////////////////////////////////////
+  
   logoutLink.addEventListener("click", (e) => {
     e.preventDefault();
     auth.removeTokenAndEmail();
@@ -76,33 +78,36 @@ document.addEventListener("DOMContentLoaded", async function() {
   });
 });
 ///////////////////////////////////////////////////////
+//new  
+ 
 document.getElementById("add-user-form").addEventListener("submit", async function (event) {
   event.preventDefault();
 
-  const firstName = document.getElementById("user_first_name").value;
-  const lastName = document.getElementById("user_last_name").value;
+  //const firstName = document.getElementById("user_first_name").value;
+  //const lastName = document.getElementById("user_last_name").value;
 
-  const newUser = { first_name: firstName, last_name: lastName };
-  let userList = await api.getUserList();
-  userList = await api.addUser(newUser, userList.concat(userList)); // Concatenate the existing user list with the new user
+  //const newUser = { first_name: firstName, last_name: lastName };
+  //let userList = await api.getUserList();
+  //console.log(userList)
+  //userList = await api.addUser(newUser, userList);
 
   // Refresh the user list after adding the new user
-  refreshUserList(userList);
+  //refreshUserList(userList);
 });
 async function refreshUserList(userList) {
-  const table = $('#table_id').DataTable();
-  table.clear(); // Clear the existing data in the table
+  //const table = $('#table_id').DataTable();
+  //table.clear(); // Clear the existing data in the table
 
-  // Add each user to the table
-  userList.forEach(user => {
-    table.row.add({
-      id: user.id,
-      first_name: user.first_name,
-      last_name: user.last_name
-    });
-  });
+  //// Add each user to the table
+  //userList.forEach(user => {
+  //  table.row.add({
+  //    id: user.id,
+  //    first_name: user.first_name,
+  //    last_name: user.last_name
+  //  });
+  //});
 
-  table.draw(); // Redraw the table with the updated data
+  //table.draw(); // Redraw the table with the updated data
 }
 ///////////////////////////////////////////////////////
 //new     
